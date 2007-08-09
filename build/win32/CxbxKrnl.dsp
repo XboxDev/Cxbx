@@ -1,5 +1,5 @@
 # Microsoft Developer Studio Project File - Name="CxbxKrnl" - Package Owner=<4>
-# Microsoft Developer Studio Generated Build File, Format Version 6.00
+# Microsoft Developer Studio Generated Build File, Format Version 60000
 # ** DO NOT EDIT **
 
 # TARGTYPE "Win32 (x86) Dynamic-Link Library" 0x0102
@@ -146,10 +146,6 @@ SOURCE=..\..\src\CxbxKrnl\HLEDataBase\DSound.1.0.4627.h
 # End Source File
 # Begin Source File
 
-SOURCE=..\..\src\CxbxKrnl\HLEDataBase\DSound.1.0.5558.h
-# End Source File
-# Begin Source File
-
 SOURCE=..\..\src\CxbxKrnl\HLEDataBase\DSound.1.0.5849.h
 # End Source File
 # Begin Source File
@@ -195,10 +191,6 @@ SOURCE=..\..\src\CxbxKrnl\HLEDataBase\XG.1.0.4361.h
 # Begin Source File
 
 SOURCE=..\..\src\CxbxKrnl\HLEDataBase\XG.1.0.4627.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\src\CxbxKrnl\HLEDataBase\XG.1.0.5558.h
 # End Source File
 # Begin Source File
 
@@ -486,11 +478,6 @@ SOURCE=..\..\src\CxbxKrnl\HLEDataBase\XG.1.0.4361.inl
 # Begin Source File
 
 SOURCE=..\..\src\CxbxKrnl\HLEDataBase\XG.1.0.4627.inl
-# PROP Exclude_From_Build 1
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\src\CxbxKrnl\HLEDataBase\XG.1.0.5558.inl
 # PROP Exclude_From_Build 1
 # End Source File
 # Begin Source File
