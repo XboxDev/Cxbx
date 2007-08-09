@@ -90,35 +90,6 @@ typedef struct _XMEDIAPACKET
 XMEDIAPACKET, *PXMEDIAPACKET, *LPXMEDIAPACKET;
 
 // ******************************************************************
-// * DSLFODESC
-// ******************************************************************
-typedef struct _DSLFODESC
-{
-	DWORD dwLFO;
-	DWORD dwDelay;
-	DWORD dwDelta;
-	LONG lPitchModulation;
-	LONG lFilterCutOffRange;
-	LONG lAmplitudeModulation;
-}
-DSLFODESC, *LPCDSLFODESC;
-
-// ******************************************************************
-// * XBOXADPCMWAVEFORMAT
-// ******************************************************************
-typedef struct xbox_adpcmwaveformat_tag 
-{
-    WAVEFORMATEX    wfx;                    // WAVEFORMATEX data
-    WORD            wSamplesPerBlock;       // Number of samples per encoded block.  It must be 64.
-}
-XBOXADPCMWAVEFORMAT, *PXBOXADPCMWAVEFORMAT, *LPXBOXADPCMWAVEFORMAT;
-
-typedef const XBOXADPCMWAVEFORMAT *LPCXBOXADPCMWAVEFORMAT;
-
-typedef struct IDirectSoundStream IDirectSoundStream;
-typedef IDirectSoundStream *LPDIRECTSOUNDSTREAM;
-
-// ******************************************************************
 // * X_CDirectSound
 // ******************************************************************
 struct X_CDirectSound
@@ -151,7 +122,6 @@ struct X_CDirectSoundBuffer
 };
 
 #define DSB_FLAG_ADPCM 0x00000001
-#define WAVE_FORMAT_XBOX_ADPCM 0x0069
 
 // ******************************************************************
 // * X_CMcpxStream
@@ -968,53 +938,6 @@ HRESULT WINAPI EmuIDirectSoundBuffer8_SetFormat
 (
     X_CDirectSoundBuffer *pBuffer, 
     LPCWAVEFORMATEX pwfxFormat
-);
-
-// ******************************************************************
-// * func: EmuDirectSoundUseFullHRTF
-// ******************************************************************
-STDAPI_(void) EmuDirectSoundUseFullHRTF
-(
-	void
-);
-
-// ******************************************************************
-// * func: EmuIDirectSoundBuffer8_SetLFO
-// ******************************************************************
-HRESULT WINAPI EmuIDirectSoundBuffer8_SetLFO
-(
-	LPDIRECTSOUNDBUFFER  pThis,
-	LPCDSLFODESC         pLFODesc
-);
-
-// ******************************************************************
-// * func: EmuXAudioCreateAdpcmFormat
-// ******************************************************************
-VOID WINAPI EmuXAudioCreateAdpcmFormat
-(
-	WORD                   nChannels,
-	DWORD                  nSamplesPerSec,
-	LPXBOXADPCMWAVEFORMAT  pwfx
-);
-
-// ******************************************************************
-// * func: EmuIDirectSoundBuffer8_SetRolloffCurve
-// ******************************************************************
-HRESULT WINAPI EmuIDirectSoundBuffer8_SetRolloffCurve
-(
-	LPDIRECTSOUNDBUFFER  pThis,
-	const FLOAT         *pflPoints,
-	DWORD                dwPointCount,
-	DWORD                dwApply
-);
-
-// ******************************************************************
-// * func: EmuIDirectSoundStream_SetVolume
-// ******************************************************************
-HRESULT WINAPI EmuIDirectSoundStream_SetVolume
-(
-	LPDIRECTSOUNDSTREAM pStream,
-	LONG                lVolume
 );
 
 #endif
