@@ -34,6 +34,11 @@
 #define _CXBXKRNL_INTERNAL
 #define _XBOXKRNL_DEFEXTRN_
 
+// VS 2015 hack
+#ifndef POINTER_64
+#define POINTER_64 __ptr64
+#endif
+
 #undef FIELD_OFFSET     // prevent macro redefinition warnings
 #include <windows.h>
 

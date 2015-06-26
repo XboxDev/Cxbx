@@ -336,6 +336,21 @@ extern int EmuException(LPEXCEPTION_POINTERS e)
         }
     }
 
+	/*if(e->ExceptionRecord->ExceptionCode == 0xC0000005)
+	{
+		if(e->ContextRecord->Eip == 0xD99E2)
+		{
+			 Zapper REP MOVSD skip
+            e->ContextRecord->Eip += 2;
+
+            DbgPrintf("EmuMain (0x%X): Zapper Hack 2 was applied!\n", GetCurrentThreadId());
+
+            g_bEmuException = false;
+
+            return EXCEPTION_CONTINUE_EXECUTION;
+        }
+	}*/
+
 	// Fusion Frenzy (Demo) *NTSC*
 	// The full version probably has the same problem.  If so, add the address here :)
 	if(e->ExceptionRecord->ExceptionCode == 0xC0000096)
@@ -743,6 +758,42 @@ extern int EmuException(LPEXCEPTION_POINTERS e)
 			e->ContextRecord->Eip += 1;
 
 			DbgPrintf("EmuMain (0x%X): Skipping privileged instruction (STI)\n", GetCurrentThreadId());
+
+			g_bEmuException = false;
+
+			return EXCEPTION_CONTINUE_EXECUTION;
+		}
+
+		// OUT DX, AL
+		if(*((BYTE*)dwEip) == 0xEE)
+		{
+			e->ContextRecord->Eip += 1;
+
+			//DbgPrintf("EmuMain (0x%X): Skipping privileged instruction (OUT DX, AL)\n", GetCurrentThreadId());
+
+			g_bEmuException = false;
+
+			return EXCEPTION_CONTINUE_EXECUTION;
+		}
+
+		// OUT DX, AX
+		if(*((BYTE*)dwEip) == 0x66 && *((BYTE*)dwEip+1) == 0xEF)
+		{
+			e->ContextRecord->Eip += 2;
+
+			//DbgPrintf("EmuMain (0x%X): Skipping privileged instruction (OUT DX, AX)\n", GetCurrentThreadId());
+
+			g_bEmuException = false;
+
+			return EXCEPTION_CONTINUE_EXECUTION;
+		}
+
+		// IN AX, DX
+		if(*((BYTE*)dwEip) == 0x66 && *((BYTE*)dwEip+1) == 0xED)
+		{
+			e->ContextRecord->Eip += 2;
+
+			//DbgPrintf("EmuMain (0x%X): Skipping privileged instruction (IN AX, DX)\n", GetCurrentThreadId());
 
 			g_bEmuException = false;
 

@@ -31,8 +31,15 @@
 // *  All rights reserved
 // *
 // ******************************************************************
+#pragma warning(disable: 4838)
+
 #define _CXBXKRNL_INTERNAL
 #define _XBOXKRNL_DEFEXTRN_
+
+// VS 2015 hack
+#ifndef POINTER_64
+#define POINTER_64 __ptr64
+#endif
 
 #undef FIELD_OFFSET     // prevent macro redefinition warnings
 #include <windows.h>
@@ -81,6 +88,7 @@ extern "C" const char *szHLELastCompileTime = __TIMESTAMP__;
 #include "HLEDataBase/XOnline.1.0.4361.inl"
 #include "HLEDataBase/XOnline.1.0.4627.inl"
 #include "HLEDataBase/XOnline.1.0.5233.inl"
+#include "HLEDataBase/XOnline.1.0.5558.inl"
 #include "HLEDataBase/XOnline.1.0.5849.inl"
 #include "HLEDataBase/XactEng.1.0.4627.inl"
 
@@ -363,6 +371,13 @@ HLEData HLEDataBase[] =
         XOnline_1_0_5233,
         XOnline_1_0_5233_SIZE
     },
+	// XOnline(s) Version 1.0.5558
+	{
+        "XONLINES",
+        1, 0, 5558,
+        XOnline_1_0_5558,
+        XOnline_1_0_5558_SIZE
+    },
 	// XOnline(s) Version 1.0.5849
 	{
         "XONLINES",
@@ -401,6 +416,7 @@ extern uint32 XRefDataBase[] =
     -1, // XREF_D3D_BLOCKONTIME
     -1, // XREF_D3D_SETFENCE
 	-1, // XREF_D3D_MakeRequestedSpace
+	-1, // XREF_D3D_KickOff
     -1, // XREF_XNINIT
     -1, // XREF_FCLOSEDEVICE
     -1, // XREF_CLEARSTATEBLOCKFLAGS

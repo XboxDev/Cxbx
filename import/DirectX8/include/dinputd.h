@@ -11,6 +11,7 @@
 
 #ifndef DIRECTINPUT_VERSION
 #define DIRECTINPUT_VERSION         0x0800
+#pragma message(__FILE__ ": DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800")
 #endif
 
 #ifdef __cplusplus
@@ -59,6 +60,12 @@ typedef struct DIOBJECTCALIBRATION {
     LONG    lMax;
 } DIOBJECTCALIBRATION, *LPDIOBJECTCALIBRATION;
 typedef const DIOBJECTCALIBRATION *LPCDIOBJECTCALIBRATION;
+
+typedef struct DIPOVCALIBRATION {
+    LONG    lMin[5];
+    LONG    lMax[5];
+} DIPOVCALIBRATION, *LPDIPOVCALIBRATION;
+typedef const DIPOVCALIBRATION *LPCDIPOVCALIBRATION;
 
 typedef struct DIEFFECTATTRIBUTES {
     DWORD   dwEffectId;
@@ -254,6 +261,7 @@ typedef struct IDirectInputEffectDriver *LPDIRECTINPUTEFFECTDRIVER;
 #define JOYTYPE_ZEROGAMEENUMOEMDATA     0x00000001l /* Zero GameEnum's OEM data field */
 #define JOYTYPE_NOAUTODETECTGAMEPORT    0x00000002l /* Device does not support Autodetect gameport*/
 #define JOYTYPE_NOHIDDIRECT             0x00000004l /* Do not use HID directly for this device */
+#define JOYTYPE_ANALOGCOMPAT            0x00000008l /* Expose the analog compatible ID */
 #define JOYTYPE_DEFAULTPROPSHEET        0x80000000l /* CPL overrides custom property sheet */
 
 /* Settings for TypeInfo Flags2 */
@@ -270,6 +278,7 @@ typedef struct IDirectInputEffectDriver *LPDIRECTINPUTEFFECTDRIVER;
 #define JOYTYPE_INFOZRPEDALS            0x00800000l /* Use Z for accelerate, R for brake */
 #define JOYTYPE_INFOZISSLIDER           0x00200000l /* Use Z as a slider */
 #define JOYTYPE_INFOZISZ                0x00400000l /* Use Z as Z axis */
+#define JOYTYPE_ENABLEINPUTREPORT       0x01000000l /* Enable initial input reports */
 
 /* struct for storing x,y, z, and rudder values */
 typedef struct joypos_tag {
@@ -631,6 +640,10 @@ typedef struct IDirectInputJoyConfig8 *LPDIRECTINPUTJOYCONFIG8;
 
 #endif /* DIRECTINPUT_VERSION >= 0x0800 */
 
+#define DIAPPIDFLAG_NOTIME         0x00000001
+#define DIAPPIDFLAG_NOSIZE         0x00000002
+
+#define DIRECTINPUT_REGSTR_VAL_APPIDFLAGA   "AppIdFlag"
 #define DIRECTINPUT_REGSTR_KEY_LASTAPPA     "MostRecentApplication"
 #define DIRECTINPUT_REGSTR_KEY_LASTMAPAPPA  "MostRecentMapperApplication"
 #define DIRECTINPUT_REGSTR_VAL_VERSIONA     "Version"
@@ -639,6 +652,7 @@ typedef struct IDirectInputJoyConfig8 *LPDIRECTINPUTJOYCONFIG8;
 #define DIRECTINPUT_REGSTR_VAL_MAPPERA      "UsesMapper"
 #define DIRECTINPUT_REGSTR_VAL_LASTSTARTA   "MostRecentStart"
 
+#define DIRECTINPUT_REGSTR_VAL_APPIDFLAGW   L"AppIdFlag"
 #define DIRECTINPUT_REGSTR_KEY_LASTAPPW     L"MostRecentApplication"
 #define DIRECTINPUT_REGSTR_KEY_LASTMAPAPPW  L"MostRecentMapperApplication"
 #define DIRECTINPUT_REGSTR_VAL_VERSIONW     L"Version"
@@ -648,6 +662,7 @@ typedef struct IDirectInputJoyConfig8 *LPDIRECTINPUTJOYCONFIG8;
 #define DIRECTINPUT_REGSTR_VAL_LASTSTARTW   L"MostRecentStart"
 
 #ifdef UNICODE
+#define DIRECTINPUT_REGSTR_VAL_APPIDFLAG    DIRECTINPUT_REGSTR_VAL_APPIDFLAGW
 #define DIRECTINPUT_REGSTR_KEY_LASTAPP      DIRECTINPUT_REGSTR_KEY_LASTAPPW
 #define DIRECTINPUT_REGSTR_KEY_LASTMAPAPP   DIRECTINPUT_REGSTR_KEY_LASTMAPAPPW
 #define DIRECTINPUT_REGSTR_VAL_VERSION      DIRECTINPUT_REGSTR_VAL_VERSIONW
@@ -656,6 +671,7 @@ typedef struct IDirectInputJoyConfig8 *LPDIRECTINPUTJOYCONFIG8;
 #define DIRECTINPUT_REGSTR_VAL_MAPPER       DIRECTINPUT_REGSTR_VAL_MAPPERW
 #define DIRECTINPUT_REGSTR_VAL_LASTSTART    DIRECTINPUT_REGSTR_VAL_LASTSTARTW
 #else
+#define DIRECTINPUT_REGSTR_VAL_APPIDFLAG    DIRECTINPUT_REGSTR_VAL_APPIDFLAGA
 #define DIRECTINPUT_REGSTR_KEY_LASTAPP      DIRECTINPUT_REGSTR_KEY_LASTAPPA
 #define DIRECTINPUT_REGSTR_KEY_LASTMAPAPP   DIRECTINPUT_REGSTR_KEY_LASTMAPAPPA
 #define DIRECTINPUT_REGSTR_VAL_VERSION      DIRECTINPUT_REGSTR_VAL_VERSIONA

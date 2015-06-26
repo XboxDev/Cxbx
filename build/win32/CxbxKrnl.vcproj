@@ -504,6 +504,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\CxbxKrnl\HLEDataBase\XOnline.1.0.5558.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\CxbxKrnl\HLEDataBase\XOnline.1.0.5849.h"
 					>
 				</File>
@@ -1827,6 +1831,10 @@
 				</File>
 				<File
 					RelativePath="..\..\src\CxbxKrnl\HLEDataBase\XOnline.1.0.5233.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\CxbxKrnl\HLEDataBase\XOnline.1.0.5558.inl"
 					>
 				</File>
 				<File

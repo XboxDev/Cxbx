@@ -46,7 +46,9 @@ static void  EmuInstallWrappers(OOVPATable *OovpaTable, uint32 OovpaTableSize, X
 static void  EmuXRefFailure();
 
 #include <shlobj.h>
+#define _CMATH_
 #include <vector>
+#undef _CMATH_
 
 uint32 fcount = 0;
 uint32 funcExclude[2048] = {0};
@@ -259,7 +261,7 @@ void EmuHLEIntercept(Xbe::LibraryVersion *pLibraryVersion, Xbe::Header *pXbeHead
                     }
 
 					// Redirect other highly similar DSOUND library versions
-					if(BuildVersion == 4361 || BuildVersion == 4400 || BuildVersion == 4432 || 
+					if(/*BuildVersion == 4361 ||*/ BuildVersion == 4400 || BuildVersion == 4432 || 
 						BuildVersion == 4531 )
 						BuildVersion = 4627;
                 }

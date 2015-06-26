@@ -40,6 +40,7 @@ extern "C" {
 #define DIRECTINPUT_HEADER_VERSION  0x0800
 #ifndef DIRECTINPUT_VERSION
 #define DIRECTINPUT_VERSION         DIRECTINPUT_HEADER_VERSION
+#pragma message(__FILE__ ": DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800")
 #endif
 
 #ifndef DIJ_RINGZERO
@@ -1036,7 +1037,9 @@ typedef const DIPROPHEADER *LPCDIPROPHEADER;
 #define DIPH_BYID               2
 #if(DIRECTINPUT_VERSION >= 0x050a)
 #define DIPH_BYUSAGE            3
+#endif /* DIRECTINPUT_VERSION >= 0x050a */
 
+#if(DIRECTINPUT_VERSION >= 0x050a)
 #define DIMAKEUSAGEDWORD(UsagePage, Usage) \
                                 (DWORD)MAKELONG(Usage, UsagePage)
 #endif /* DIRECTINPUT_VERSION >= 0x050a */
@@ -1073,6 +1076,13 @@ typedef struct DIPROPCAL {
     LONG    lMax;
 } DIPROPCAL, *LPDIPROPCAL;
 typedef const DIPROPCAL *LPCDIPROPCAL;
+
+typedef struct DIPROPCALPOV {
+    DIPROPHEADER diph;
+    LONG   lMin[5];
+    LONG   lMax[5];
+} DIPROPCALPOV, *LPDIPROPCALPOV;
+typedef const DIPROPCALPOV *LPCDIPROPCALPOV;
 
 typedef struct DIPROPGUIDANDPATH {
     DIPROPHEADER diph;
@@ -2099,18 +2109,18 @@ typedef struct _DIMOUSESTATE2 {
 #define DIK_NUMPAD3         0x51
 #define DIK_NUMPAD0         0x52
 #define DIK_DECIMAL         0x53    /* . on numeric keypad */
-#define DIK_OEM_102         0x56    /* < > | on UK/Germany keyboards */
+#define DIK_OEM_102         0x56    /* <> or \| on RT 102-key keyboard (Non-U.S.) */
 #define DIK_F11             0x57
 #define DIK_F12             0x58
 #define DIK_F13             0x64    /*                     (NEC PC98) */
 #define DIK_F14             0x65    /*                     (NEC PC98) */
 #define DIK_F15             0x66    /*                     (NEC PC98) */
 #define DIK_KANA            0x70    /* (Japanese keyboard)            */
-#define DIK_ABNT_C1         0x73    /* / ? on Portugese (Brazilian) keyboards */
+#define DIK_ABNT_C1         0x73    /* /? on Brazilian keyboard */
 #define DIK_CONVERT         0x79    /* (Japanese keyboard)            */
 #define DIK_NOCONVERT       0x7B    /* (Japanese keyboard)            */
 #define DIK_YEN             0x7D    /* (Japanese keyboard)            */
-#define DIK_ABNT_C2         0x7E    /* Numpad . on Portugese (Brazilian) keyboards */
+#define DIK_ABNT_C2         0x7E    /* Numpad . on Brazilian keyboard */
 #define DIK_NUMPADEQUALS    0x8D    /* = on numeric keypad (NEC PC98) */
 #define DIK_PREVTRACK       0x90    /* Previous Track (DIK_CIRCUMFLEX on Japanese keyboard) */
 #define DIK_AT              0x91    /*                     (NEC PC98) */
@@ -3052,18 +3062,18 @@ extern HRESULT WINAPI DirectInputCreateEx(HINSTANCE hinst, DWORD dwVersion, REFI
 #define DIKEYBOARD_NUMPAD3                      0x81000451
 #define DIKEYBOARD_NUMPAD0                      0x81000452
 #define DIKEYBOARD_DECIMAL                      0x81000453    /* . on numeric keypad */
-#define DIKEYBOARD_OEM_102                      0x81000456    /* < > | on UK/Germany keyboards */
+#define DIKEYBOARD_OEM_102                      0x81000456    /* <> or \| on RT 102-key keyboard (Non-U.S.) */
 #define DIKEYBOARD_F11                          0x81000457
 #define DIKEYBOARD_F12                          0x81000458
 #define DIKEYBOARD_F13                          0x81000464    /*                     (NEC PC98) */
 #define DIKEYBOARD_F14                          0x81000465    /*                     (NEC PC98) */
 #define DIKEYBOARD_F15                          0x81000466    /*                     (NEC PC98) */
 #define DIKEYBOARD_KANA                         0x81000470    /* (Japanese keyboard)            */
-#define DIKEYBOARD_ABNT_C1                      0x81000473    /* / ? on Portugese (Brazilian) keyboards */
+#define DIKEYBOARD_ABNT_C1                      0x81000473    /* /? on Brazilian keyboard */
 #define DIKEYBOARD_CONVERT                      0x81000479    /* (Japanese keyboard)            */
 #define DIKEYBOARD_NOCONVERT                    0x8100047B    /* (Japanese keyboard)            */
 #define DIKEYBOARD_YEN                          0x8100047D    /* (Japanese keyboard)            */
-#define DIKEYBOARD_ABNT_C2                      0x8100047E    /* Numpad . on Portugese (Brazilian) keyboards */
+#define DIKEYBOARD_ABNT_C2                      0x8100047E    /* Numpad . on Brazilian keyboard */
 #define DIKEYBOARD_NUMPADEQUALS                 0x8100048D    /* = on numeric keypad (NEC PC98) */
 #define DIKEYBOARD_PREVTRACK                    0x81000490    /* Previous Track (DIK_CIRCUMFLEX on Japanese keyboard) */
 #define DIKEYBOARD_AT                           0x81000491    /*                     (NEC PC98) */
@@ -3422,6 +3432,8 @@ extern HRESULT WINAPI DirectInputCreateEx(HINSTANCE hinst, DWORD dwVersion, REFI
 #define DIBUTTON_FPS_BACKWARD_LINK              0x090144E8 /* Fallback backward button */
 #define DIBUTTON_FPS_GLANCE_UP_LINK             0x0901C4E0 /* Fallback look up button */
 #define DIBUTTON_FPS_GLANCE_DOWN_LINK           0x0901C4E8 /* Fallback look down button */
+#define DIBUTTON_FPS_STEP_LEFT_LINK             0x090244E4 /* Fallback step left button */
+#define DIBUTTON_FPS_STEP_RIGHT_LINK            0x090244EC /* Fallback step right button */
 #define DIBUTTON_FPS_DEVICE                     0x090044FE /* Show input device and controls */
 #define DIBUTTON_FPS_PAUSE                      0x090044FC /* Start / Pause / Restart game */
 

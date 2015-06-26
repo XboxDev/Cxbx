@@ -1221,6 +1221,351 @@ SOOVPA<9> XInputGetDeviceDescription_1_0_4831 =
 };
 
 // ******************************************************************
+// * WaitForSingleObjectEx
+// ******************************************************************
+SOOVPA<7> WaitForSingleObjectEx_1_0_4627 = 
+{
+    0,  // Large == 0
+    7,  // Count == 7
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x07, 0x75 },
+        { 0x12, 0x8B },
+        { 0x19, 0x01 },
+        { 0x23, 0x85 },
+        { 0x2B, 0x74 },
+        { 0x34, 0xEB },
+        { 0x3D, 0xC8 },
+    }
+};
+
+// ******************************************************************
+// * JvsEEPROM_Read
+// ******************************************************************
+SOOVPA<8> JvsEEPROM_Read_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x00, 0x51 },
+        { 0x11, 0x83 },
+        { 0x12, 0xF9 },
+        { 0x13, 0x40 },
+        { 0x43, 0x6A },
+		{ 0x44, 0x17 },
+        { 0x4C, 0x6A },
+        { 0x4D, 0x40 },
+    }
+};
+
+// ******************************************************************
+// * JvsBACKUP_Read
+// ******************************************************************
+SOOVPA<8> JvsBACKUP_Read_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x00, 0x8B },
+        { 0x11, 0x8D },
+        { 0x12, 0x54 },
+        { 0x13, 0x24 },
+        { 0x43, 0xBE },
+		{ 0x44, 0x00 },
+        { 0x4C, 0x05 },
+        { 0x4D, 0x00 },
+    }
+};
+
+// ******************************************************************
+// * JvsScFirmwareDownload
+// ******************************************************************
+SOOVPA<8> JvsScFirmwareDownload_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x03, 0x8B },
+        { 0x04, 0x4C },
+        { 0x05, 0x24 },
+        { 0x06, 0x30 },
+        { 0x07, 0x53 },
+		{ 0x0F, 0x83 },
+        { 0x10, 0xF9 },
+        { 0x11, 0x20 },
+    }
+};
+
+// ******************************************************************
+// * JvsBACKUP_Write
+// ******************************************************************
+SOOVPA<8> JvsBACKUP_Write_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x00, 0x8B },
+        { 0x11, 0x8D },
+        { 0x12, 0x54 },
+        { 0x13, 0x24 },
+        { 0x43, 0xBE },
+		{ 0x78, 0xC2 },
+        { 0x79, 0x10 },
+        { 0x7A, 0x00 },
+    }
+};
+
+// ******************************************************************
+// * JvsEEPROM_Write
+// ******************************************************************
+SOOVPA<9> JvsEEPROM_Write_1_0_5028 = 
+{
+    0,  // Large == 0
+    9,  // Count == 9
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x3E, 0x8D },
+        { 0x3F, 0x44 },
+        { 0x40, 0x24 },
+        { 0x41, 0x24 },
+        { 0x42, 0x50 },
+		{ 0x8D, 0x6A },
+        { 0x8E, 0x1E },
+        { 0x9C, 0x6A },
+		{ 0x9D, 0x09 },
+    }
+};
+
+// ******************************************************************
+// * JvsFirmwareUpload
+// ******************************************************************
+SOOVPA<8> JvsFirmwareUpload_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x00, 0x83 },
+        { 0x12, 0x83 },
+        { 0x13, 0xF9 },
+        { 0x14, 0x20 },
+        { 0x40, 0x8D },
+		{ 0x41, 0x44 },
+        { 0x42, 0x24 },
+        { 0x43, 0x4C },
+    }
+};
+
+// ******************************************************************
+// * JvsScFirmwareUpload
+// ******************************************************************
+SOOVPA<8> JvsScFirmwareUpload_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x00, 0x51 },
+        { 0x10, 0x83 },
+        { 0x11, 0xF9 },
+        { 0x12, 0x20 },
+        { 0x3C, 0x8D },
+		{ 0x3D, 0x44 },
+        { 0x3E, 0x24 },
+        { 0x3F, 0x2C },
+    }
+};
+
+// ******************************************************************
+// * JvsFirmwareDownload
+// ******************************************************************
+SOOVPA<8> JvsFirmwareDownload_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x03, 0x8B },
+        { 0x04, 0x4C },
+        { 0x05, 0x24 },
+        { 0x06, 0x30 },
+        { 0x07, 0x53 },
+		{ 0x0F, 0x83 },
+        { 0x58, 0x6A },
+        { 0x59, 0x20 },
+    }
+};
+
+// ******************************************************************
+// * JvsRTC_Read
+// ******************************************************************
+SOOVPA<8> JvsRTC_Read_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x23, 0x6A },
+        { 0x24, 0x1C },
+        { 0x42, 0x81 },
+        { 0x43, 0xE2 },
+        { 0x44, 0x00 },
+		{ 0x45, 0xFF },
+        { 0x46, 0xFF },
+        { 0x47, 0xFF },
+    }
+};
+
+// ******************************************************************
+// * JvsNodeSendPacket
+// ******************************************************************
+SOOVPA<8> JvsNodeSendPacket_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x23, 0x6A },
+        { 0x24, 0x20 },
+        { 0x26, 0x6A },
+        { 0x27, 0x0B },
+        { 0x54, 0xF6 },
+		{ 0x55, 0xC3 },
+        { 0x56, 0x01 },
+        { 0xC9, 0xC2 },
+    }
+};
+
+// ******************************************************************
+// * JvsNodeReveivePacket
+// ******************************************************************
+SOOVPA<8> JvsNodeReceivePacket_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x28, 0x6A },
+        { 0x29, 0x19 },
+        { 0x2B, 0x6A },
+        { 0x2C, 0x03 },
+        { 0x54, 0xF6 },
+		{ 0x55, 0xC3 },
+        { 0x56, 0x01 },
+        { 0xC9, 0xC2 },
+    }
+};
+
+// ******************************************************************
+// * JvsUnknown1
+// ******************************************************************
+SOOVPA<8> JvsUnknown1_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x00, 0x81 },
+        { 0x01, 0xEC },
+        { 0x75, 0xFF },
+        { 0x76, 0x15 },
+        { 0x77, 0x80 },
+		{ 0x78, 0x02 },
+        { 0x79, 0x14 },
+        { 0x7A, 0x00 },
+    }
+};
+
+// ******************************************************************
+// * JvsUnknown2
+// ******************************************************************
+SOOVPA<8> JvsUnknown2_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x57, 0x81 },
+        { 0x58, 0xC4 },
+        { 0x59, 0x94 },
+        { 0x5A, 0x00 },
+        { 0x5B, 0x00 },
+		{ 0x5D, 0xC2 },
+        { 0x5E, 0x28 },
+        { 0x5F, 0x00 },
+    }
+};
+
+// ******************************************************************
+// * JvsUnknown3
+// ******************************************************************
+SOOVPA<8> JvsUnknown3_1_0_5028 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x0C, 0x81 },
+        { 0x0D, 0xEC },
+        { 0x0E, 0x90 },
+        { 0x0F, 0x00 },
+        { 0x10, 0x00 },
+		{ 0x5B, 0xC2 },
+        { 0x5C, 0x28 },
+        { 0x5D, 0x00 },
+    }
+};
+
+// ******************************************************************
 // * XAPI_1_0_4627
 // ******************************************************************
 OOVPATable XAPI_1_0_4627[] =
@@ -1979,12 +2324,157 @@ OOVPATable XAPI_1_0_4627[] =
 	// XInputGetDeviceDescription
 	{
         (OOVPA*)&XInputGetDeviceDescription_1_0_4831,
-        XTL::EmuXInputGetDeviceDescription,
+        XTL::EmuXInputGetCapabilities,
 
         #ifdef _DEBUG_TRACE
-        "XInputGetDeviceDescription_4831"
+        "EmuXInputGetCapabilities_4831" // <- Cheap, I know..
         #endif
 	},
+	// JvsEEPROM_Read_1_0_5028
+	{
+		(OOVPA*)&JvsEEPROM_Read_1_0_5028, 
+			
+		XTL::EmuJvsEEPROM_Read,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsEEPROM_Read"
+        #endif
+	},
+	// JvsBACKUP_Read_1_0_5028
+	{
+		(OOVPA*)&JvsBACKUP_Read_1_0_5028, 
+			
+		XTL::EmuJvsBACKUP_Read,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsBACKUP_Read"
+        #endif
+	},
+	// JvsScFirmwareDownload_1_0_5028
+	{
+		(OOVPA*)&JvsScFirmwareDownload_1_0_5028,  
+			
+		XTL::EmuJvsScFirmwareDownload,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsScFirmwareDownload"
+        #endif
+	},
+	// JvsEEPROM_Write_1_0_5028
+	{
+		(OOVPA*)&JvsEEPROM_Write_1_0_5028, 
+			
+		XTL::EmuJvsEEPROM_Write,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsEEPROM_Write"
+        #endif
+	},
+	// JvsBACKUP_Write_1_0_5028
+	{
+		(OOVPA*)&JvsBACKUP_Write_1_0_5028, 
+			
+		XTL::EmuJvsBACKUP_Write,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsBACKUP_Write"
+        #endif
+	},
+	// JvsFirmwareUpload_1_0_5028
+	{
+		(OOVPA*)&JvsFirmwareUpload_1_0_5028,  
+			
+		XTL::EmuJvsFirmwareUpload,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsFirmwareUpload"
+        #endif
+	},
+	// JvsScFirmwareUpload_1_0_5028
+	{
+		(OOVPA*)&JvsScFirmwareUpload_1_0_5028,  
+			
+		XTL::EmuJvsScFirmwareUpload,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsScFirmwareUpload"
+        #endif
+	},
+	// JvsFirmwareDownload_1_0_5028
+	{
+		(OOVPA*)&JvsFirmwareDownload_1_0_5028,  
+			
+		XTL::EmuJvsFirmwareDownload,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsFirmwareDownload"
+        #endif
+	},
+	// JvsRTC_Read_1_0_5028
+	{
+		(OOVPA*)&JvsRTC_Read_1_0_5028, 
+			
+		XTL::EmuJvsRTC_Read,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsRTC_Read"
+        #endif
+	},
+	// JvsNodeSendPacket_1_0_5028
+	{
+		(OOVPA*)&JvsNodeSendPacket_1_0_5028,  
+			
+		XTL::EmuJvsNodeSendPacket,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsNodeSendPacket"
+        #endif
+	},
+	// JvsNodeReceivePacket_1_0_5028
+	{
+		(OOVPA*)&JvsNodeReceivePacket_1_0_5028,  
+			
+		XTL::EmuJvsNodeReceivePacket,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsNodeReceivePacket"
+        #endif
+	},
+	// JvsUnknown1_1_0_5028
+	{
+		(OOVPA*)&JvsUnknown1_1_0_5028, 
+			
+		XTL::EmuJVS_SendCommand,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJVS_SendCommand"
+        #endif
+	},
+	// JvsUnknown2_1_0_5028
+	{
+		(OOVPA*)&JvsUnknown2_1_0_5028, 0,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsUnknown2 (XREF)"
+        #endif
+	},
+	// JvsUnknown3_1_0_5028
+	{
+		(OOVPA*)&JvsUnknown3_1_0_5028, 0,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsUnknown3(XREF)"
+        #endif
+	},
+	// WaitForSingleObjectEx
+	/*{
+        (OOVPA*)&WaitForSingleObjectEx_1_0_4627,
+        XTL::EmuWaitForSingleObjectEx,
+
+        #ifdef _DEBUG_TRACE
+		"EmuWaitForSingleObjectEx (Test)"
+        #endif
+	},*/
 	// MoveFileA
 	/*{
 		(OOVPA*)&MoveFileA_1_0_4627,

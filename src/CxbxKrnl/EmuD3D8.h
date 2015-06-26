@@ -1946,9 +1946,30 @@ HRESULT WINAPI EmuIDirect3DDevice8_GetScissors
 	BOOL	*pExclusive, 
 	D3DRECT *pRects
 );
+
 // ******************************************************************
 // * func: EmuIDirect3DDevice8_GetBackMaterial
 // ******************************************************************
 HRESULT WINAPI EmuIDirect3DDevice8_GetBackMaterial(D3DMATERIAL8* pMaterial);
+
+// ******************************************************************
+// * func: EmuIDirect3DDevice8_SetDepthClipPlanes
+// ******************************************************************
+void WINAPI EmuIDirect3DDevice8_SetDepthClipPlanes
+(
+    float Near,
+    float Far,
+    DWORD Flags
+);
+
+// ******************************************************************
+// * func: EmuD3D::LazySetPointParams
+// ******************************************************************
+void WINAPI EmuD3D_LazySetPointParams( void* Device );
+
+// ******************************************************************
+// * func: EmuIDirect3DDevice8_GetMaterial
+// ******************************************************************
+HRESULT WINAPI EmuIDirect3DDevice8_GetMaterial(D3DMATERIAL8* pMaterial);
 
 #endif

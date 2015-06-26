@@ -361,6 +361,14 @@ OOVPATable XAPI_1_0_4432[] =
         "EmuRtlDestroyHeap"
         #endif
     },
+	// XID_fCloseDevice (* unchanged since 4432 *)
+    {
+        (OOVPA*)&XID_fCloseDevice_1_0_4361, 0,
+
+        #ifdef _DEBUG_TRACE
+        "XID_fCloseDevice (XREF)"
+        #endif
+    },
 };
 
 // ******************************************************************

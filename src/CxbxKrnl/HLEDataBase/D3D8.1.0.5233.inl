@@ -1833,6 +1833,8 @@ SOOVPA<8> D3DDevice_SetViewport_1_0_5344 =
 // ******************************************************************
 // * D3DDevice_SetTransform
 // ******************************************************************
+// * FIX ME!!!
+// ******************************************************************
 SOOVPA<8> D3DDevice_SetTransform_1_0_5344 = 
 {
     0,  // Large == 0
@@ -3364,7 +3366,7 @@ OOVPATable D3D8_1_0_5233[] =
         #endif
     },
 	// IDirect3DDevice8::SetTransform
-    {
+   {
         (OOVPA*)&D3DDevice_SetTransform_1_0_5344,
 
         XTL::EmuIDirect3DDevice8_SetTransform,

@@ -1721,6 +1721,28 @@ SOOVPA<8> D3DDevice_GetTexture2_1_0_5849 =
 };
 
 // ******************************************************************
+// * D3DDevice_SetDepthClipPlanes
+// ******************************************************************
+SOOVPA<7> D3DDevice_SetDepthClipPlanes_1_0_5849 = 
+{
+    0,  // Large == 0
+    7,  // Count == 7
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x12, 0x24 },
+        { 0x26, 0x8B },
+        { 0x3A, 0x0C },
+        { 0x4E, 0x1C },
+        { 0x62, 0x86 },
+        { 0x76, 0x05 },
+        { 0x8A, 0x00 },
+    }
+};
+
+// ******************************************************************
 // * D3D8_1_0_5849
 // ******************************************************************
 OOVPATable D3D8_1_0_5849[] =
@@ -3093,6 +3115,35 @@ OOVPATable D3D8_1_0_5849[] =
         #ifdef _DEBUG_TRACE
 		"EmuIDirect3DDevice8_SetRenderTargetFast"
         #endif
+    },
+	// IDirect3D8::GetAdapterModeCount (* unchanged since 4361 *)
+    {
+        (OOVPA*)&IDirect3D8_GetAdapterModeCount_1_0_4361,
+
+        XTL::EmuIDirect3D8_GetAdapterModeCount,
+
+        #ifdef _DEBUG_TRACE
+        "EmuIDirect3D8_GetAdapterModeCount"
+        #endif
+    },
+	// IDirect3D8::EnumAdapterModes (* unchanged since 4361 *)
+    {
+        (OOVPA*)&IDirect3D8_EnumAdapterModes_1_0_4361,
+
+        XTL::EmuIDirect3D8_EnumAdapterModes,
+
+        #ifdef _DEBUG_TRACE
+        "EmuIDirect3D8_EnumAdapterModes"
+        #endif
+    },
+	// D3DDevice_SetDepthClipPlanes
+	{
+       (OOVPA*)&D3DDevice_SetDepthClipPlanes_1_0_5849,
+       XTL::EmuIDirect3DDevice8_SetDepthClipPlanes,
+
+       #ifdef _DEBUG_TRACE
+       "EmuIDirect3DDevice8_SetDepthClipPlanes"
+       #endif
     },
 };
 

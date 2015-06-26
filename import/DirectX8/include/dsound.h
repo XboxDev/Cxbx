@@ -1,6 +1,6 @@
 /*==========================================================================;
  *
- *  Copyright (C) 1995-2000 Microsoft Corporation.  All Rights Reserved.
+ *  Copyright (C) 1995-2001 Microsoft Corporation.  All Rights Reserved.
  *
  *  File:       dsound.h
  *  Content:    DirectSound include file
@@ -300,8 +300,8 @@ typedef const DSBCAPS *LPCDSBCAPS;
         DWORD       dwSize;
         DWORD       dwFlags;
         GUID        guidDSFXClass;
-        DWORD       dwReserved1;
-        DWORD       dwReserved2;
+        DWORD_PTR   dwReserved1;
+        DWORD_PTR   dwReserved2;
     } DSEFFECTDESC, *LPDSEFFECTDESC;
     typedef const DSEFFECTDESC *LPCDSEFFECTDESC;
 
@@ -335,9 +335,6 @@ typedef const DSBCAPS *LPCDSBCAPS;
 
     #define DSCFXR_LOCHARDWARE  0x00000010
     #define DSCFXR_LOCSOFTWARE  0x00000020
-    #define DSCFXR_UNALLOCATED  0x00000040
-    #define DSCFXR_FAILED       0x00000080
-    #define DSCFXR_UNKNOWN      0x00000100
 
 #endif // DIRECTSOUND_VERSION >= 0x0800
 
@@ -1793,15 +1790,27 @@ DECLARE_INTERFACE_(IDirectSoundFXWavesReverb, IUnknown)
 // IDirectSoundCaptureFXAec
 //
 
-DEFINE_GUID(IID_IDirectSoundCaptureFXAec, 0x174d3eb9, 0x6696, 0x4fac, 0xa4, 0x6c, 0xa0, 0xac, 0x7b, 0xc9, 0xe2, 0xf);
+DEFINE_GUID(IID_IDirectSoundCaptureFXAec, 0xad74143d, 0x903d, 0x4ab7, 0x80, 0x66, 0x28, 0xd3, 0x63, 0x03, 0x6d, 0x65);
 
 typedef struct _DSCFXAec
 {
     BOOL    fEnable;
-    BOOL    fReset;
+    BOOL    fNoiseFill;
+    DWORD   dwMode;
 } DSCFXAec, *LPDSCFXAec;
 
 typedef const DSCFXAec *LPCDSCFXAec;
+
+// These match the AEC_MODE_* constants in the DDK's ksmedia.h file
+#define DSCFX_AEC_MODE_PASS_THROUGH                     0x0
+#define DSCFX_AEC_MODE_HALF_DUPLEX                      0x1
+#define DSCFX_AEC_MODE_FULL_DUPLEX                      0x2
+
+// These match the AEC_STATUS_* constants in ksmedia.h
+#define DSCFX_AEC_STATUS_HISTORY_UNINITIALIZED          0x0
+#define DSCFX_AEC_STATUS_HISTORY_CONTINUOUSLY_CONVERGED 0x1
+#define DSCFX_AEC_STATUS_HISTORY_PREVIOUSLY_DIVERGED    0x2
+#define DSCFX_AEC_STATUS_CURRENTLY_CONVERGED            0x8
 
 #undef INTERFACE
 #define INTERFACE IDirectSoundCaptureFXAec
@@ -1816,6 +1825,8 @@ DECLARE_INTERFACE_(IDirectSoundCaptureFXAec, IUnknown)
     // IDirectSoundCaptureFXAec methods
     STDMETHOD(SetAllParameters)     (THIS_ LPCDSCFXAec pDscFxAec) PURE;
     STDMETHOD(GetAllParameters)     (THIS_ LPDSCFXAec pDscFxAec) PURE;
+    STDMETHOD(GetStatus)            (THIS_ PDWORD pdwStatus) PURE;
+    STDMETHOD(Reset)                (THIS) PURE;
 };
 
 #define IDirectSoundCaptureFXAec_QueryInterface(p,a,b)     IUnknown_QueryInterface(p,a,b)
@@ -1840,7 +1851,6 @@ DEFINE_GUID(IID_IDirectSoundCaptureFXNoiseSuppress, 0xed311e41, 0xfbae, 0x4175, 
 typedef struct _DSCFXNoiseSuppress
 {
     BOOL    fEnable;
-    BOOL    fReset;
 } DSCFXNoiseSuppress, *LPDSCFXNoiseSuppress;
 
 typedef const DSCFXNoiseSuppress *LPCDSCFXNoiseSuppress;
@@ -1858,6 +1868,7 @@ DECLARE_INTERFACE_(IDirectSoundCaptureFXNoiseSuppress, IUnknown)
     // IDirectSoundCaptureFXNoiseSuppress methods
     STDMETHOD(SetAllParameters)     (THIS_ LPCDSCFXNoiseSuppress pcDscFxNoiseSuppress) PURE;
     STDMETHOD(GetAllParameters)     (THIS_ LPDSCFXNoiseSuppress pDscFxNoiseSuppress) PURE;
+    STDMETHOD(Reset)                (THIS) PURE;
 };
 
 #define IDirectSoundCaptureFXNoiseSuppress_QueryInterface(p,a,b)     IUnknown_QueryInterface(p,a,b)
@@ -1999,6 +2010,10 @@ DECLARE_INTERFACE_(IDirectSoundFullDuplex, IUnknown)
 // The object requested was not found (numerically equal to DMUS_E_NOT_FOUND)
 #define DSERR_OBJECTNOTFOUND            MAKE_DSHRESULT(4449)
 
+// The effects requested could not be found on the system, or they were found
+// but in the wrong order, or in the wrong hardware/software locations.
+#define DSERR_FXUNAVAILABLE             MAKE_DSHRESULT(220)
+
 //
 // Flags
 //
@@ -2020,12 +2035,14 @@ DECLARE_INTERFACE_(IDirectSoundFullDuplex, IUnknown)
 #define DSSCL_EXCLUSIVE             0x00000003
 #define DSSCL_WRITEPRIMARY          0x00000004
 
+#define DSSPEAKER_DIRECTOUT         0x00000000
 #define DSSPEAKER_HEADPHONE         0x00000001
 #define DSSPEAKER_MONO              0x00000002
 #define DSSPEAKER_QUAD              0x00000003
 #define DSSPEAKER_STEREO            0x00000004
 #define DSSPEAKER_SURROUND          0x00000005
 #define DSSPEAKER_5POINT1           0x00000006
+#define DSSPEAKER_7POINT1           0x00000007
 
 #define DSSPEAKER_GEOMETRY_MIN      0x00000005  //   5 degrees
 #define DSSPEAKER_GEOMETRY_NARROW   0x0000000A  //  10 degrees
@@ -2137,13 +2154,6 @@ DECLARE_INTERFACE_(IDirectSoundFullDuplex, IUnknown)
 
 #define DS_CERTIFIED                0x00000000
 #define DS_UNCERTIFIED              0x00000001
-
-// Dsound SYSTEM resource constants
-// Matches the KSAUDIO_CPU_RESOURCES_xxx_HOST_CPU values defined 
-// in ksmedia.h.
-#define DS_SYSTEM_RESOURCES_NO_HOST_RESOURCES  0x00000000
-#define DS_SYSTEM_RESOURCES_ALL_HOST_RESOURCES 0x7FFFFFFF
-#define DS_SYSTEM_RESOURCES_UNDEFINED          0x80000000
 
 
 //
@@ -2330,7 +2340,6 @@ DEFINE_GUID(GUID_DSCFX_MS_NS, 0x11c5c73b, 0x66e9, 0x4ba1, 0xa0, 0xba, 0xe8, 0x14
 
 // System Noise Suppresion {5AB0882E-7274-4516-877D-4EEE99BA4FD0}
 DEFINE_GUID(GUID_DSCFX_SYSTEM_NS, 0x5ab0882e, 0x7274, 0x4516, 0x87, 0x7d, 0x4e, 0xee, 0x99, 0xba, 0x4f, 0xd0);
-
 
 #endif // DIRECTSOUND_VERSION >= 0x0800
 

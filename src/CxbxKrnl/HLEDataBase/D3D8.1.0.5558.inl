@@ -951,8 +951,8 @@ SOOVPA<11> IDirect3DDevice8_CreatePixelShader_1_0_5558 =
 
     {
         // IDirect3DDevice8_CreatePixelShader+0x00 : push 0xFC
-        { 0x03, 0x68 }, // (Offset,Value)-Pair #1
-        { 0x04, 0xFC }, // (Offset,Value)-Pair #2
+        { 0x05, 0x68 }, // (Offset,Value)-Pair #1
+        { 0x06, 0xFC }, // (Offset,Value)-Pair #2
 
         // IDirect3DDevice8_CreatePixelShader+0x10 : mov eax, 0x8007000E
         { 0x13, 0xB8 }, // (Offset,Value)-Pair #3
@@ -2139,6 +2139,28 @@ SOOVPA<7> D3DDevice_IsFencePending_1_0_5558 =
         { 0x12, 0x44 },
         { 0x16, 0xC2 },
         { 0x1A, 0xD8 },
+    }
+};
+
+// ******************************************************************
+// * D3DDevice_EnableOverlay
+// ******************************************************************
+SOOVPA<7> D3DDevice_EnableOverlay_1_0_5558 = 
+{
+    0,  // Large == 0
+    7,  // Count == 7
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x0B, 0x8B },
+        { 0x18, 0x80 },
+        { 0x25, 0x00 },
+        { 0x32, 0x00 },
+        { 0x3F, 0xFF },
+        { 0x4C, 0x00 },
+        { 0x59, 0x00 },
     }
 };
 
@@ -3656,6 +3678,16 @@ OOVPATable D3D8_1_0_5558[] =
 
         #ifdef _DEBUG_TRACE
 		"EmuIDirect3DDevice8_SetRenderTargetFast"
+        #endif
+    },
+	// IDirect3DDevice8::EnableOverlay (* unchanged since 4361 *)
+    {
+        (OOVPA*)&IDirect3DDevice8_EnableOverlay_1_0_4361,
+
+        XTL::EmuIDirect3DDevice8_EnableOverlay,
+
+        #ifdef _DEBUG_TRACE
+        "EmuIDirect3DDevice8_EnableOverlay"
         #endif
     },
 };

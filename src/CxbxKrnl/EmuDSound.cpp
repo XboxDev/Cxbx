@@ -1983,6 +1983,14 @@ HRESULT WINAPI XTL::EmuCDirectSoundStream_Process
 
     if(pThis->EmuDirectSoundBuffer8 != NULL)
     {
+		// TEST: Wait for this sound buffer to finish?
+		/*DWORD dwStatus;
+
+		do
+		{
+			pThis->EmuDirectSoundBuffer8->GetStatus( &dwStatus );
+		} while( dwStatus == DSBSTATUS_PLAYING );*/
+
         // update buffer data cache
         pThis->EmuBuffer = pInputBuffer->pvBuffer;
 
@@ -3351,11 +3359,11 @@ extern "C" HRESULT __stdcall XTL::EmuIDirectSoundBuffer8_PlayEx
     if(pBuffer->EmuDirectSoundBuffer8 == 0)
         EmuWarning("pBuffer->EmuDirectSoundBuffer8 == 0");
 
-//    EmuWarning("PlayEx not yet implemented!");
+    EmuWarning("PlayEx not yet implemented!");
 
 	// TODO: Handle other non-PC standard flags
-	DWORD dwPCFlags = ( dwFlags & DSBPLAY_LOOPING ) ? DSBPLAY_LOOPING : 0;
-	HRESULT hr = pBuffer->EmuDirectSoundBuffer8->Play( 0, 0, dwPCFlags );
+//	DWORD dwPCFlags = ( dwFlags & DSBPLAY_LOOPING ) ? DSBPLAY_LOOPING : 0;
+//	HRESULT hr = pBuffer->EmuDirectSoundBuffer8->Play( 0, 0, dwPCFlags );
 
     EmuSwapFS();   // XBox FS
 

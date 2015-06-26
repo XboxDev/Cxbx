@@ -483,6 +483,120 @@ SOOVPA<9> XInputClose_1_0_5558 =
 };
 
 // ******************************************************************
+// * timeSetEvent
+// ******************************************************************
+SOOVPA<7> timeSetEvent_1_0_5558 = 
+{
+    0,  // Large == 0
+    7,  // Count == 7
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x1E, 0x53 },
+        { 0x3E, 0xE8 },
+        { 0x60, 0x8B },
+        { 0x7E, 0xFC },
+        { 0x9E, 0xFF },
+        { 0xBE, 0x2C },
+        { 0xDE, 0xFF },
+    }
+};
+
+// ******************************************************************
+// * timeKillEvent
+// ******************************************************************
+SOOVPA<8> timeKillEvent_1_0_5558 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x0E, 0x8B },
+        { 0x1A, 0xC2 },
+        { 0x28, 0x8D },
+        { 0x36, 0x56 },
+        { 0x44, 0x00 },
+        { 0x52, 0x00 },
+        { 0x60, 0x5E },
+        { 0x6E, 0x00 },
+    }
+};
+
+// ******************************************************************
+// * JVS_SendCommand
+// ******************************************************************
+SOOVPA<8> JVS_SendCommand_1_0_5455 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x00, 0x83 },
+        { 0x01, 0xEC },
+        { 0x02, 0x58 },
+        { 0x03, 0x53 },
+        { 0x86, 0x88 },
+		{ 0x87, 0x44 },
+        { 0x88, 0x24 },
+        { 0x89, 0x70 },
+    }
+};
+
+// ******************************************************************
+// * JvsEEPROM_Read
+// ******************************************************************
+SOOVPA<8> JvsEEPROM_Read_1_0_5455 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x00, 0x51 },
+        { 0x10, 0x83 },
+        { 0x11, 0xF9 },
+        { 0x12, 0x40 },
+        { 0x43, 0x6A },
+		{ 0x44, 0x17 },
+        { 0x4C, 0x6A },
+        { 0x4D, 0x40 },
+    }
+};
+
+// ******************************************************************
+// * JvsUnknown1
+// ******************************************************************
+SOOVPA<8> JvsUnknown1_1_0_5455 = 
+{
+    0,  // Large == 0
+    8,  // Count == 8
+
+    -1, // Xref Not Saved
+    0,  // Xref Not Used
+
+    {
+        { 0x08, 0x83 },
+        { 0x09, 0xEC },
+        { 0x0A, 0x48 },
+        { 0x35, 0xC7 },
+        { 0x36, 0x04 },
+		{ 0x37, 0xBD },
+        { 0x38, 0x90 },
+        { 0x39, 0x9A },
+    }
+};
+
+// ******************************************************************
 // * XAPI_1_0_5558
 // ******************************************************************
 OOVPATable XAPI_1_0_5558[] =
@@ -921,6 +1035,178 @@ OOVPATable XAPI_1_0_5558[] =
         "EmuXInputClose"
         #endif
     },
+	// timeSetEvent
+    {
+        (OOVPA*)&timeSetEvent_1_0_5558,
+        XTL::EmutimeSetEvent,
+
+        #ifdef _DEBUG_TRACE
+        "EmutimeSetEvent"
+        #endif
+    },
+    // timeKillEvent
+    {
+        (OOVPA*)&timeKillEvent_1_0_5558,
+        XTL::EmutimeKillEvent,
+
+        #ifdef _DEBUG_TRACE
+        "EmutimeKillEvent"
+        #endif
+    },
+	// XFormatUtilityDrive (* unchanged since 4627 *)
+    {
+        (OOVPA*)&XFormatUtilityDrive_1_0_4627,
+
+        XTL::EmuXFormatUtilityDrive,
+
+        #ifdef _DEBUG_TRACE
+        "EmuXFormatUtilityDrive"
+        #endif
+    },
+	// JvsEEPROM_Read_1_0_5455
+	{
+		(OOVPA*)&JvsEEPROM_Read_1_0_5455, 
+			
+		XTL::EmuJvsEEPROM_Read,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsEEPROM_Read (5455)"
+        #endif
+	},
+	// JvsBACKUP_Read_1_0_5028
+	{
+		(OOVPA*)&JvsBACKUP_Read_1_0_5028, 
+			
+		XTL::EmuJvsBACKUP_Read,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsBACKUP_Read"
+        #endif
+	},
+	// JvsScFirmwareDownload_1_0_5028
+	{
+		(OOVPA*)&JvsScFirmwareDownload_1_0_5028,  
+			
+		XTL::EmuJvsScFirmwareDownload,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsScFirmwareDownload"
+        #endif
+	},
+	// JvsEEPROM_Write_1_0_5028
+	{
+		(OOVPA*)&JvsEEPROM_Write_1_0_5028, 
+			
+		XTL::EmuJvsEEPROM_Write,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsEEPROM_Write"
+        #endif
+	},
+	// JvsBACKUP_Write_1_0_5028
+	{
+		(OOVPA*)&JvsBACKUP_Write_1_0_5028, 
+			
+		XTL::EmuJvsBACKUP_Write,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsBACKUP_Write"
+        #endif
+	},
+	// JvsFirmwareUpload_1_0_5028
+	{
+		(OOVPA*)&JvsFirmwareUpload_1_0_5028,  
+			
+		XTL::EmuJvsFirmwareUpload,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsFirmwareUpload"
+        #endif
+	},
+	// JvsScFirmwareUpload_1_0_5028
+	{
+		(OOVPA*)&JvsScFirmwareUpload_1_0_5028,  
+			
+		XTL::EmuJvsScFirmwareUpload,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsScFirmwareUpload"
+        #endif
+	},
+	// JvsFirmwareDownload_1_0_5028
+	{
+		(OOVPA*)&JvsFirmwareDownload_1_0_5028,  
+			
+		XTL::EmuJvsFirmwareDownload,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsFirmwareDownload"
+        #endif
+	},
+	// JvsRTC_Read_1_0_5028
+	{
+		(OOVPA*)&JvsRTC_Read_1_0_5028, 
+			
+		XTL::EmuJvsRTC_Read,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsRTC_Read"
+        #endif
+	},
+	// JvsNodeSendPacket_1_0_5028
+	{
+		(OOVPA*)&JvsNodeSendPacket_1_0_5028,  
+			
+		XTL::EmuJvsNodeSendPacket,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsNodeSendPacket"
+        #endif
+	},
+	// JvsNodeReceivePacket_1_0_5028
+	{
+		(OOVPA*)&JvsNodeReceivePacket_1_0_5028,  
+			
+		XTL::EmuJvsNodeReceivePacket,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsNodeReceivePacket"
+        #endif
+	},
+	// JVS_SendCommand_1_0_5455
+	{
+		(OOVPA*)&JVS_SendCommand_1_0_5455, 
+			
+		/*XTL::EmuJVS_SendCommand*/0,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJVS_SendCommand (XREF)"
+        #endif
+	},
+	// JvsUnknown1_1_0_5455
+	{
+		(OOVPA*)&JvsUnknown1_1_0_5455, 0,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsUnknown1 (XREF)"
+        #endif
+	},
+	// JvsUnknown2_1_0_5028
+	{
+		(OOVPA*)&JvsUnknown2_1_0_5028, 0,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsUnknown2 (XREF)"
+        #endif
+	},
+	// JvsUnknown3_1_0_5028
+	{
+		(OOVPA*)&JvsUnknown3_1_0_5028, 0,
+
+        #ifdef _DEBUG_TRACE
+		"EmuJvsUnknown3(XREF)"
+        #endif
+	},
 };
 
 // ******************************************************************

@@ -86,7 +86,7 @@ struct INTERNAL_CRITICAL_SECTION
 	NtDll::_RTL_CRITICAL_SECTION NativeCriticalSection;
 };
 
-#define MAX_XBOX_CRITICAL_SECTIONS 1024
+#define MAX_XBOX_CRITICAL_SECTIONS 2048
 INTERNAL_CRITICAL_SECTION GlobalCriticalSections[MAX_XBOX_CRITICAL_SECTIONS] = {0};
 
 void InitializeSectionStructures(void)
@@ -1162,8 +1162,6 @@ XBSYSAPI EXPORTNUM(1) xboxkrnl::PVOID NTAPI xboxkrnl::AvGetSavedDataAddress()
 
 	DbgPrintf("EmuKrnl (0x%X): AvGetSavedDataAddress();\n", GetCurrentThreadId() );
 
-	__asm int 3;
-
 	// Allocate a buffer the size of the screen buffer and return that.
 	// TODO: Fill this buffer with the contents of the front buffer.
 	// TODO: This isn't always the size we need...
@@ -1517,6 +1515,22 @@ XBSYSAPI EXPORTNUM(29) xboxkrnl::NTSTATUS NTAPI xboxkrnl::ExSaveNonVolatileSetti
 }
 
 // ******************************************************************
+// * 0x0023 - FscGetCacheSize
+// ******************************************************************
+XBSYSAPI EXPORTNUM(35) xboxkrnl::DWORD NTAPI xboxkrnl::FscGetCacheSize()
+{
+	EmuSwapFS();   // Win2k/XP FS
+
+    DbgPrintf("EmuKrnl (0x%X): FscGetCacheSize()", GetCurrentThreadId());
+
+    EmuWarning("FscGetCacheSize returning default 64kb");
+
+    EmuSwapFS();   // Xbox FS
+
+	return 64*1024;
+}
+
+// ******************************************************************
 // * 0x0025 - FscSetCacheSize
 // ******************************************************************
 XBSYSAPI EXPORTNUM(37) xboxkrnl::LONG NTAPI xboxkrnl::FscSetCacheSize(ULONG uCachePages)
@@ -1534,6 +1548,58 @@ XBSYSAPI EXPORTNUM(37) xboxkrnl::LONG NTAPI xboxkrnl::FscSetCacheSize(ULONG uCac
     EmuSwapFS();   // Xbox FS
 
     return 0;
+}
+
+// ******************************************************************
+// * HalGetInterruptVector
+// ******************************************************************
+XBSYSAPI EXPORTNUM(44) xboxkrnl::ULONG  NTAPI xboxkrnl::HalGetInterruptVector
+(
+    IN ULONG   InterruptLevel,
+    OUT CHAR*  Irql
+)
+{
+	EmuSwapFS();   // Win2k/XP FS
+
+    DbgPrintf("EmuKrnl (0x%X): HalRegisterShutdownNotification\n"
+           "(\n"
+           "   InterruptLevel      : 0x%.08X\n"
+		   "   Irql                : 0x%.08X\n"
+           ");\n",
+           GetCurrentThreadId(), InterruptLevel, Irql);
+
+	// I'm only adding this for Virtua Cop 3 (Chihiro). Xbox games need not emulate this.
+
+	EmuWarning( "HalGetInterruptVector(): If this is NOT a Chihiro game, tell blueshogun!" );
+
+    EmuSwapFS();   // Xbox FS
+
+	return 1;
+}
+
+// ******************************************************************
+// * 0x002F - HalRegisterShutdownNotification
+// ******************************************************************
+XBSYSAPI EXPORTNUM(47) VOID NTAPI xboxkrnl::HalRegisterShutdownNotification
+(
+	PVOID	ShutdownRegistration,
+	CHAR	Register
+)
+{
+	EmuSwapFS();   // Win2k/XP FS
+
+    DbgPrintf("EmuKrnl (0x%X): HalRegisterShutdownNotification\n"
+           "(\n"
+           "   ShutdownRegistration : 0x%.08X\n"
+		   "   Register             : 0x%.08X\n"
+           ");\n",
+           GetCurrentThreadId(), ShutdownRegistration, Register);
+
+	// I'm only adding this for Virtua Cop 3 (Chihiro). Xbox games need not emulate this.
+
+	EmuWarning( "HalRegisterShutdownNotification(): If this is NOT a Chihiro game, tell blueshogun!" );
+
+    EmuSwapFS();   // Xbox FS
 }
 
 // ******************************************************************
@@ -1702,6 +1768,27 @@ XBSYSAPI EXPORTNUM(95) VOID NTAPI xboxkrnl::KeBugCheck
 }
 
 // ******************************************************************
+// * KeConnectInterrupt
+// ******************************************************************
+XBSYSAPI EXPORTNUM(98) xboxkrnl::LONG NTAPI xboxkrnl::KeConnectInterrupt
+(
+    IN PKINTERRUPT  InterruptObject
+)
+{
+	EmuSwapFS();	// Win2k/XP FS
+
+	DbgPrintf("EmuKrnl (0x%X): KeConnectInterrupt\n"
+			"(\n"
+			"   InterruptObject   : 0x%.08X\n"
+			");\n",
+			GetCurrentThreadId(), InterruptObject);
+
+	EmuSwapFS();	// Xbox FS
+
+	return 0;
+}
+
+// ******************************************************************
 // * 0x0063 - KeDelayExecutionThread
 // ******************************************************************
 XBSYSAPI EXPORTNUM(99) xboxkrnl::NTSTATUS NTAPI xboxkrnl::KeDelayExecutionThread
@@ -1713,13 +1800,13 @@ XBSYSAPI EXPORTNUM(99) xboxkrnl::NTSTATUS NTAPI xboxkrnl::KeDelayExecutionThread
 {
     EmuSwapFS();   // Win2k/XP FS
 
-    DbgPrintf("EmuKrnl (0x%X): KeDelayExecutionThread\n"
+    /*DbgPrintf("EmuKrnl (0x%X): KeDelayExecutionThread\n"
            "(\n"
            "   WaitMode            : 0x%.08X\n"
            "   Alertable           : 0x%.08X\n"
            "   Interval            : 0x%.08X (%I64d)\n"
            ");\n",
-           GetCurrentThreadId(), WaitMode, Alertable, Interval, Interval == 0 ? 0 : Interval->QuadPart);
+           GetCurrentThreadId(), WaitMode, Alertable, Interval, Interval == 0 ? 0 : Interval->QuadPart);*/
 
     NTSTATUS ret = NtDll::NtDelayExecution(Alertable, (NtDll::LARGE_INTEGER*)Interval);
 
@@ -1757,6 +1844,37 @@ XBSYSAPI EXPORTNUM(107) VOID NTAPI xboxkrnl::KeInitializeDpc
     EmuSwapFS();   // Xbox FS
 
     return;
+}
+
+// ******************************************************************
+// * 0x006D - KeInitializeInterrupt
+// ******************************************************************
+XBSYSAPI EXPORTNUM(109) VOID NTAPI xboxkrnl::KeInitializeInterrupt
+(
+    OUT PKINTERRUPT Interrupt,
+    IN PKSERVICE_ROUTINE ServiceRoutine,
+    IN PVOID ServiceContext,
+    IN ULONG Vector,
+    IN KIRQL Irql,
+    IN KINTERRUPT_MODE InterruptMode,
+    IN BOOLEAN ShareVector
+)
+{
+	EmuSwapFS();   // Win2k/XP FS
+
+    DbgPrintf("EmuKrnl (0x%X): KeInitializeInterrupt\n"
+           "(\n"
+           "   Interrupt           : 0x%.08X\n"
+           "   ServiceRoutine      : 0x%.08X\n"
+           "   ServiceContext      : 0x%.08X\n"
+		   "   Vector              : 0x%.08X\n"
+		   "   Irql                : 0x%.08X\n"
+		   "   InterruptMode       : 0x%.08X\n"
+		   "   ShareVector         : 0x%.08X\n"
+           ");\n",
+           GetCurrentThreadId(), Interrupt, ServiceRoutine, ServiceContext, Vector, Irql, InterruptMode, ShareVector);
+
+    EmuSwapFS();   // Xbox FS
 }
 
 // ******************************************************************
@@ -1869,7 +1987,7 @@ XBSYSAPI EXPORTNUM(129) xboxkrnl::UCHAR NTAPI xboxkrnl::KeRaiseIrqlToDpcLevel()
     DbgPrintf("EmuKrnl (0x%X): KeRaiseIrqlToDpcLevel()\n", GetCurrentThreadId());
 
 	// I really tried to avoid adding this...
-//	__asm int 3;
+	__asm int 3;
 //	CxbxKrnlCleanup("KeRaiseIrqlToDpcLevel not implemented! (Tell blueshogun -_-)");
 
 	EmuSwapFS();
@@ -3329,6 +3447,7 @@ XBSYSAPI EXPORTNUM(218) xboxkrnl::NTSTATUS NTAPI xboxkrnl::NtQueryVolumeInformat
     return ret;
 }
 
+#if 0
 // ******************************************************************
 // * 0x00DA - NtReadFile
 // ******************************************************************
@@ -3373,6 +3492,124 @@ XBSYSAPI EXPORTNUM(219) xboxkrnl::NTSTATUS NTAPI xboxkrnl::NtReadFile
 
     return ret;
 }
+#else
+extern XTL::X_D3DPixelContainer* last_pPixelContainer;
+extern XTL::X_D3DVertexBuffer *last_CreateVertexBuffer_pD3DVertexBuffer;
+extern UINT last_CreateVertexBuffer_Length;
+
+// ******************************************************************
+// * 0x00DA - NtReadFile
+// ******************************************************************
+XBSYSAPI EXPORTNUM(219) xboxkrnl::NTSTATUS NTAPI xboxkrnl::NtReadFile
+(
+    IN  HANDLE          FileHandle,            // TODO: correct paramters
+    IN  HANDLE          Event OPTIONAL,
+    IN  PVOID           ApcRoutine OPTIONAL,
+    IN  PVOID           ApcContext,
+    OUT PVOID           IoStatusBlock,
+    OUT PVOID           Buffer,
+    IN  ULONG           Length,
+    IN  PLARGE_INTEGER  ByteOffset OPTIONAL
+)
+{
+    EmuSwapFS();   // Win2k/XP FS
+
+	if((UINT)Buffer >= 0x80000000) {
+		DbgPrintf("LAST EmuTexture8: = 0x%.08X\n", last_pPixelContainer->EmuTexture8 );
+		
+		if(Length == last_CreateVertexBuffer_Length) {
+			DbgPrintf("NtReadFile last_CreateVertexBuffer_pD3DVertexBuffer: = 0x%.08X\n", last_CreateVertexBuffer_pD3DVertexBuffer);
+			Buffer = last_CreateVertexBuffer_pD3DVertexBuffer;
+
+            BYTE *pData = 0;
+
+            HRESULT hRet = last_CreateVertexBuffer_pD3DVertexBuffer->EmuVertexBuffer8->Lock(0, 0, &pData, 0);
+
+            if(FAILED(hRet))
+                CxbxKrnlCleanup("VertexBuffer Lock Failed!!\n\nError: %s\nDesc: %s", "S", "S");
+
+			DbgPrintf("EmuKrnl (0x%X): NtReadFile\n"
+				   "(\n"
+				   "   FileHandle          : 0x%.08X\n"
+				   "   Event               : 0x%.08X\n"
+				   "   ApcRoutine          : 0x%.08X\n"
+				   "   ApcContext          : 0x%.08X\n"
+				   "   IoStatusBlock       : 0x%.08X\n"
+				   "   Buffer              : 0x%.08X\n"
+				   "   Length              : 0x%.08X\n"
+				   "   ByteOffset          : 0x%.08X (0x%.08X)\n"
+				   ");\n",
+				   GetCurrentThreadId(), FileHandle, Event, ApcRoutine,
+				   ApcContext, IoStatusBlock, Buffer, Length, ByteOffset, ByteOffset == 0 ? 0 : ByteOffset->QuadPart);
+
+			NTSTATUS ret = NtDll::NtReadFile(FileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock, pData, Length, (NtDll::LARGE_INTEGER*)ByteOffset, 0);
+
+			if(FAILED(ret))
+				/*CxbxKrnlCleanup*/EmuWarning("NtReadFile Failed! (0x%.08X)\n", ret);
+
+			last_CreateVertexBuffer_pD3DVertexBuffer->EmuVertexBuffer8->Unlock();
+
+			EmuSwapFS();   // Xbox FS
+
+			return ret;
+		} else {
+			// Assume it's a texture
+			// Todo: Check size against the last createtexture
+
+			//Buffer = (PVOID)((UINT)Buffer - (UINT)0x80000000);
+
+			XTL::D3DLOCKED_RECT LockedRect;
+
+            last_pPixelContainer->EmuTexture8->LockRect(0, &LockedRect, NULL, NULL);
+
+            last_pPixelContainer->Data = (DWORD)LockedRect.pBits;
+            //pPixelContainer->Format = Format << X_D3DFORMAT_FORMAT_SHIFT;
+
+           // g_DataToTexture.insert((*ppTexture)->Data, *ppTexture);
+
+			NTSTATUS ret = NtDll::NtReadFile(FileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock, (PVOID)last_pPixelContainer->Data, Length, (NtDll::LARGE_INTEGER*)ByteOffset, 0);
+
+			if(FAILED(ret))
+				/*CxbxKrnlCleanup*/EmuWarning("NtReadFile Failed! (0x%.08X)\n", ret);
+
+            last_pPixelContainer->EmuTexture8->UnlockRect(0);
+
+			EmuSwapFS();   // Xbox FS
+
+			return ret;
+
+			DbgPrintf("NtReadFile last fix unknown\n");
+		}
+	}
+
+    DbgPrintf("EmuKrnl (0x%X): NtReadFile\n"
+           "(\n"
+           "   FileHandle          : 0x%.08X\n"
+           "   Event               : 0x%.08X\n"
+           "   ApcRoutine          : 0x%.08X\n"
+           "   ApcContext          : 0x%.08X\n"
+           "   IoStatusBlock       : 0x%.08X\n"
+           "   Buffer              : 0x%.08X\n"
+           "   Length              : 0x%.08X\n"
+           "   ByteOffset          : 0x%.08X (0x%.08X)\n"
+           ");\n",
+           GetCurrentThreadId(), FileHandle, Event, ApcRoutine,
+           ApcContext, IoStatusBlock, Buffer, Length, ByteOffset, ByteOffset == 0 ? 0 : ByteOffset->QuadPart);
+
+// Halo...
+//    if(ByteOffset != 0 && ByteOffset->QuadPart == 0x00120800)
+//        _asm int 3
+
+    NTSTATUS ret = NtDll::NtReadFile(FileHandle, Event, ApcRoutine, ApcContext, IoStatusBlock, Buffer, Length, (NtDll::LARGE_INTEGER*)ByteOffset, 0);
+
+    if(FAILED(ret))
+		/*CxbxKrnlCleanup*/EmuWarning("NtReadFile Failed! (0x%.08X)\n", ret);
+
+    EmuSwapFS();   // Xbox FS
+
+    return ret;
+}
+#endif
 
 // ******************************************************************
 // * 0x00DD - NtReleaseMutant

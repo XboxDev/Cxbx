@@ -1016,6 +1016,150 @@ BOOL WINAPI EmuWriteFileEx
 	LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine // completion routine
 );
 
+// ******************************************************************
+// * func: EmuWaitForSingleObjectEx
+// ******************************************************************
+DWORD WINAPI EmuWaitForSingleObjectEx
+(
+	HANDLE hHandle,        // handle to object
+	DWORD dwMilliseconds,  // time-out interval
+	BOOL bAlertable        // alertable option
+);
+
+// ******************************************************************
+// * func: EmuJvsEEPROM_Read
+// ******************************************************************
+DWORD WINAPI EmuJvsEEPROM_Read
+( 
+	DWORD	Unknown1, 
+	DWORD	Unknown2, 
+	LPVOID  Unknown3, 
+	DWORD	Unknown4 
+);
+
+// ******************************************************************
+// * func: EmuJvsBACKUP_Read
+// ******************************************************************
+DWORD WINAPI EmuJvsBACKUP_Read
+( 
+	DWORD	Unknown1, 
+	DWORD	Unknown2, 
+	LPVOID  Unknown3, 
+	DWORD	Unknown4 
+);
+
+// ******************************************************************
+// * func: EmuJvsScFirmwareDownload
+// ******************************************************************
+DWORD WINAPI EmuJvsScFirmwareDownload
+( 
+	DWORD	Unknown1, 
+	DWORD	Unknown2, 
+	LPVOID  Unknown3, 
+	DWORD	Unknown4 
+);
+
+// ******************************************************************
+// * func: EmuJvsBACKUP_Write
+// ******************************************************************
+DWORD WINAPI EmuJvsBACKUP_Write
+( 
+	LPVOID	Unknown1, 
+	LPVOID	Unknown2, 
+	LPVOID  Unknown3, 
+	DWORD	Unknown4 
+);
+
+// ******************************************************************
+// * func: EmuJvsEEPROM_Write
+// ******************************************************************
+DWORD WINAPI EmuJvsEEPROM_Write
+( 
+	LPVOID	Unknown1, 
+	LPVOID	Unknown2, 
+	LPVOID  Unknown3, 
+	DWORD	Unknown4 
+);
+
+// ******************************************************************
+// * func: EmuJvsFirmwareUpload
+// ******************************************************************
+DWORD WINAPI EmuJvsFirmwareUpload
+( 
+	LPVOID	Unknown1, 
+	LPVOID	Unknown2, 
+	LPVOID  Unknown3, 
+	DWORD	Unknown4 
+);
+
+// ******************************************************************
+// * func: EmuJvsScFirmwareUpload
+// ******************************************************************
+DWORD WINAPI EmuJvsScFirmwareUpload
+( 
+	LPVOID	Unknown1, 
+	LPVOID	Unknown2, 
+	LPVOID  Unknown3, 
+	DWORD	Unknown4 
+);
+
+// ******************************************************************
+// * func: EmuJvsFirmwareDownload
+// ******************************************************************
+DWORD WINAPI EmuJvsFirmwareDownload
+( 
+	DWORD	Unknown1, 
+	DWORD	Unknown2, 
+	LPVOID  Unknown3, 
+	DWORD	Unknown4 
+);
+
+// ******************************************************************
+// * func: EmuJvsRTC_Read
+// ******************************************************************
+DWORD WINAPI EmuJvsRTC_Read
+( 
+	DWORD	Unknown1, 
+	DWORD	Unknown2, 
+	LPVOID  Unknown3, 
+	DWORD	Unknown4 
+);
+
+// ******************************************************************
+// * func: EmuJvsNodeSendPacket
+// ******************************************************************
+VOID WINAPI EmuJvsNodeSendPacket
+(
+	LPVOID	Unknown1,
+	LPVOID  Unknown2,
+	LPVOID  Unknown3
+);
+
+// ******************************************************************
+// * func: EmuJvsNodeReceivePacket
+// ******************************************************************
+VOID WINAPI EmuJvsNodeReceivePacket
+(
+	LPVOID	Unknown1,
+	LPVOID  Unknown2,
+	LPVOID  Unknown3
+);
+
+// ******************************************************************
+// * func: EmuJVS_SendCommand
+// ******************************************************************
+VOID WINAPI EmuJVS_SendCommand
+(
+	LPVOID	Unknown1,
+	LPVOID	Unknown2,
+	LPVOID	Unknown3,
+	LPVOID	Unknown4,
+	LPVOID	Unknown5,
+	LPVOID	Unknown6,
+	LPVOID	Unknown7,
+	LPVOID	Unknown8
+);
+
 // s+
 /* not necessary?
 // ******************************************************************

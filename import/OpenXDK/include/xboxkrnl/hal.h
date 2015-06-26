@@ -27,7 +27,15 @@ XBSYSAPI VOID *HalDiskCachePartitionCount;
 XBSYSAPI VOID *HalDiskModelNumber;
 XBSYSAPI VOID *HalDiskSerialNumber;
 XBSYSAPI VOID *HalEnableSystemInterrupt;
-XBSYSAPI VOID *HalGetInterruptVector;
+
+// ******************************************************************
+// * HalGetInterruptVector
+// ******************************************************************
+XBSYSAPI EXPORTNUM(44) ULONG  NTAPI HalGetInterruptVector
+(
+    IN ULONG   InterruptLevel,
+    OUT CHAR*  Irql
+);
 
 // ******************************************************************
 // * HalReadSMBusValue
@@ -55,7 +63,15 @@ XBSYSAPI EXPORTNUM(46) VOID NTAPI HalReadWritePCISpace
   IN BOOLEAN WritePCISpace
 );
 
-XBSYSAPI VOID *HalRegisterShutdownNotification;
+// ******************************************************************
+// * HalRegisterShutdownNotification
+// ******************************************************************
+XBSYSAPI EXPORTNUM(47) VOID NTAPI HalRegisterShutdownNotification
+(
+	PVOID	ShutdownRegistration,
+	CHAR	Register
+);
+
 XBSYSAPI VOID *HalRequestSoftwareInterrupt;
 
 // ******************************************************************
